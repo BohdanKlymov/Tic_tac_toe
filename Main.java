@@ -26,9 +26,23 @@ public class Main {
             System.out.print("Position in row: ");
             String row = userInput.nextLine().trim();;
 
-            if (isInteger(column) && isInteger(row)) {
-                if (Integer.parseInt(column) < 4 && Integer.parseInt(column) > 0 && Integer.parseInt(row) < 4 && Integer.parseInt(row) > 0) {
+            if (Methods.isInteger(column) && Methods.isInteger(row)) {
 
+                int col = Integer.parseInt(column);
+                int r   = Integer.parseInt(row);
+
+                if (col > 0 && col < 4 && r > 0 && r < 4) {
+
+                    if (fields[col - 1][r - 1] == "x" || fields[col - 1][r - 1] == "o") {
+                        System.out.println("This field has already been placed.");
+                    }
+                    else {
+                        fields[col - 1][r - 1] = "x";
+
+                        Methods.printBoard(fields);
+
+                        Methods.machineTurn(fields);
+                    }
                 }
                 else {
                     System.out.println("Your options for each method: 1-3.");
@@ -40,15 +54,5 @@ public class Main {
 
         }
         userInput.close();
-    }
-
-    public static boolean isInteger(String s) {
-        if (s == null || s.isEmpty()) return false;
-        try {
-            Integer.parseInt(s);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
     }
 }
