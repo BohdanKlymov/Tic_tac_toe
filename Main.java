@@ -39,9 +39,12 @@ public class Main {
                     else {
                         fields[col - 1][r - 1] = "x";
 
-                        Methods.printBoard(fields);
-
-                        Methods.machineTurn(fields);
+                        if (Methods.victoryCheck(fields)) {
+                            System.out.println("That's it.");
+                        }
+                        else {
+                            Methods.machineTurn(fields);
+                        }
                     }
                 }
                 else {
