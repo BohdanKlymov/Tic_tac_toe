@@ -3,8 +3,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("Tic-tac-toe game:");
-        System.out.println("You will automatically use 'x' and your oponent 'o'.");
+        System.out.println("Tic-tac-toe game: \nYou will automatically use 'x' and your opponent 'o'.");
         System.out.println("Write down two numbers. The first number is the position of “x” in the column, and the second is in the row. \nYour options for each method: 1-3.");
 
         String[][] fields = {
@@ -21,10 +20,10 @@ public class Main {
 
         while (!endPoint){
             System.out.print("Position in column: ");
-            String column = userInput.nextLine().trim();;
+            String column = userInput.nextLine().trim();
 
             System.out.print("Position in row: ");
-            String row = userInput.nextLine().trim();;
+            String row = userInput.nextLine().trim();
 
             if (Methods.isInteger(column) && Methods.isInteger(row)) {
 
@@ -40,10 +39,13 @@ public class Main {
                         fields[col - 1][r - 1] = "x";
 
                         if (Methods.victoryCheck(fields)) {
-                            System.out.println("That's it.");
+                            endPoint = true;
                         }
                         else {
                             Methods.machineTurn(fields);
+                            if (Methods.victoryCheck(fields)) {
+                                endPoint = true;
+                            }
                         }
                     }
                 }

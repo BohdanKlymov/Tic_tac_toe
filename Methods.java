@@ -45,32 +45,60 @@ public class Methods {
         }
     }
 
-    public static boolean victoryCheck(String [][] board) {
+    public static boolean victoryCheck(String[][] board) {
+        String[] players = {"x", "o"};
+        String[] messages = {"You won.", "You lost.", "Draw."};
 
-        String userWin = "You won.";
-        String machineWin = "You lost.";
+        for (int p = 0; p < players.length; p++) {
+            String s = players[p];
 
-        if (board[0][0] == "x" && board[0][1] == "x" && board[0][2] == "x") {
+            for (int i = 0; i < 3; i++) {
+                if (board[i][0].equals(s) && board[i][1].equals(s) && board[i][2].equals(s)) {
+                    highlightWin(board, i, 0, i, 1, i, 2);
+                    System.out.println("\n");
+                    Methods.printBoard(board);
+                    System.out.println(messages[p]);
+                    return true;
+                }
+            }
 
-            board[0][0] = "\uD83E\uDD73";
-            board[0][1] = "\uD83E\uDD73";
-            board[0][2] = "\uD83E\uDD73";
+            for (int i = 0; i < 3; i++) {
+                if (board[0][i].equals(s) && board[1][i].equals(s) && board[2][i].equals(s)) {
+                    highlightWin(board, 0, i, 1, i, 2, i);
+                    System.out.println("\n");
+                    Methods.printBoard(board);
+                    System.out.println(messages[p]);
+                    return true;
+                }
+            }
 
-            Methods.printBoard(board);
-            System.out.println(userWin);
-            return true;
+            if (board[0][0].equals(s) && board[1][1].equals(s) && board[2][2].equals(s)) {
+                highlightWin(board, 0, 0, 1, 1, 2, 2);
+                System.out.println("\n");
+                Methods.printBoard(board);
+                System.out.println(messages[p]);
+                return true;
+            }
 
-        } else if (board[0][0] == "x" && board[1][1] == "x" && board[2][2] == "x") {
-
-            board[0][0] = "\uD83E\uDD73";
-            board[1][1] = "\uD83E\uDD73";
-            board[2][2] = "\uD83E\uDD73";
-
-            Methods.printBoard(board);
-            System.out.println(userWin);
-            return true;
+            if (board[0][2].equals(s) && board[1][1].equals(s) && board[2][0].equals(s)) {
+                highlightWin(board, 0, 2, 1, 1, 2, 0);
+                System.out.println("\n");
+                Methods.printBoard(board);
+                System.out.println(messages[p]);
+                return true;
+            }
         }
+
         return false;
+    }
+
+    private static void highlightWin(String[][] board,
+                                     int r1, int c1,
+                                     int r2, int c2,
+                                     int r3, int c3) {
+        board[r1][c1] = "\uD83E\uDD73";
+        board[r2][c2] = "\uD83E\uDD73";
+        board[r3][c3] = "\uD83E\uDD73";
     }
 
 }
