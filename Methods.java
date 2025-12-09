@@ -28,26 +28,22 @@ public class Methods {
 
         while (!endPoint) {
 
-            int column = random.ints(1, 4).limit(1).sum();
-            int row = random.ints(1, 4).limit(1).sum();
+            int column = random.nextInt(3) + 1; // simpler
+            int row = random.nextInt(3) + 1;
 
-            int col = Integer.parseInt(String.valueOf(column));
-            int r   = Integer.parseInt(String.valueOf(row));
-
-            if (board[col - 1][r - 1] == "*") {
-                board[col - 1][r - 1] = "o";
+            if (board[column - 1][row - 1].equals("*")) {
+                board[column - 1][row - 1] = "o";
 
                 Methods.printBoard(board);
 
                 endPoint = true;
             }
-
         }
     }
 
     public static boolean victoryCheck(String[][] board) {
         String[] players = {"x", "o"};
-        String[] messages = {"You won.", "You lost.", "Draw."};
+        String[] messages = {"You won.", "You lost."};
 
         for (int p = 0; p < players.length; p++) {
             String s = players[p];
@@ -101,4 +97,13 @@ public class Methods {
         board[r3][c3] = "\uD83E\uDD73";
     }
 
+    public static boolean boardIsFull(String[][] board) {
+        for (String[] row : board) {
+            for (String element : row) {
+                if (element.equals("*")) return false;
+            }
+        }
+        return true;
+    }
 }
+

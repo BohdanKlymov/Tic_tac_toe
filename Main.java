@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+
 public class Main {
     public static void main(String[] args) {
 
@@ -13,7 +14,6 @@ public class Main {
         };
 
         Methods.printBoard(fields);
-
 
         Scanner userInput = new Scanner(System.in);
         boolean endPoint = false;
@@ -32,7 +32,7 @@ public class Main {
 
                 if (col > 0 && col < 4 && r > 0 && r < 4) {
 
-                    if (fields[col - 1][r - 1] == "x" || fields[col - 1][r - 1] == "o") {
+                    if (fields[col - 1][r - 1].equals("x") || fields[col - 1][r - 1].equals("o")) {
                         System.out.println("This field has already been placed.");
                     }
                     else {
@@ -41,9 +41,18 @@ public class Main {
                         if (Methods.victoryCheck(fields)) {
                             endPoint = true;
                         }
+                        else if (Methods.boardIsFull(fields)) {
+                            System.out.println("Draw.");
+                            endPoint = true;
+                        }
                         else {
                             Methods.machineTurn(fields);
+
                             if (Methods.victoryCheck(fields)) {
+                                endPoint = true;
+                            }
+                            else if (Methods.boardIsFull(fields)) {
+                                System.out.println("Draw.");
                                 endPoint = true;
                             }
                         }
